@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FOUND IT | Lost • Found • Reunited</title>
+
+<style>
+:root {
+    --bg: #080817;
+    --panel: #15152d;
+    --panel2: #101024;
+    --text: #f7f5ff;
+    --muted: #bbb9d3;
+    --accent: #a78bfa;
+    --border: #44336e;
+    --input: #09091b;
+}
+
+body.light {
+    --bg: #f4f2ff;
+    --panel: #ffffff;
+    --panel2: #e9e6fa;
+    --text: #211b3b;
+    --muted: #5e5875;
+    --accent: #6840c8;
+    --border: #c8bce9;
+    --input: #f8f7ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    transition: 0.3s;
+    min-height: 100vh;
+}
+
+button {
+    background: linear-gradient(90deg, #7437dc, #2779ec);
+    border: none;
+    padding: 11px 18px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    margin: 5px;
+    transition: 0.25s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 18px #7547dd88;
+}
+
+button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+}
+
+header {
+    background: var(--panel2);
+    padding: 15px 4%;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.brand {
+    font-size: 23px;
+    color: var(--accent);
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+nav {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+nav button {
+    background: transparent;
+    color: var(--text);
+    padding: 8px;
+    font-size: 13px;
+}
+
+nav button:hover {
+    background: var(--border);
+    box-shadow: none;
+}
+
+#menuBtn {
+    display: none;
+}
+
+.page {
+    display: none;
+    min-height: 78vh;
+    padding: 42px 7%;
+    animation: appear 0.35s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* INTRO PAGE */
+
+#intro {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #080817, #32105c, #102c68);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 25px;
+}
+
+.logo {
+    font-size: 72px;
+    color: #c4b5fd;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 8px #7437dc;
+        transform: scale(1);
+    }
+    to {
+        text-shadow: 0 0 32px #398bff;
+        transform: scale(1.08);
+    }
+}
+
+#intro h1 {
+    font-size: clamp(35px, 7vw, 55px);
+    letter-spacing: 7px;
+    margin: 14px;
+}
+
+#intro p {
+    color: #ddd5ff;
+    margin: 8px;
+}
+
+/* HOME PAGE */
+
+.hero {
+    text-align: center;
+    padding: 75px 18px;
+    background: linear-gradient(120deg, #17113c, #111f50);
+    border-radius: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(30px, 5vw, 45px);
+    margin-bottom: 16px;
+}
+
+.hero span,
+.section-title {
+    color: var(--accent);
+}
+
+.hero p {
+    color: #d0cbed;
+    line-height: 1.8;
+    max-width: 750px;
+    margin: 0 auto 18px;
+}
+
+.section-title {
+    margin-bottom: 22px;
+}
+
+/* CARDS */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 18px;
+    margin-top: 25px;
+}
+
+.card,
+.form-box {
+    background: var(--panel);
+    padding: 23px;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    transition: 0.25s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+.card h3 {
+    color: var(--accent);
+    margin: 9px 0;
+}
+
+.card p {
+    color: var(--muted);
+    line-height: 1.65;
+    margin: 8px 0;
+}
+
+.icon {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+/* FORMS */
+
+.form-box {
+    max-width: 560px;
+    margin: auto;
+}
+
+label {
+    display: block;
+    color: var(--muted);
+    margin-top: 12px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    margin: 7px 0 4px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: var(--input);
+    color: var(--text);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid var(--accent);
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.error-msg {
+    color: #ff7777;
+    font-size: 12px;
+    min-height: 16px;
+    display: block;
+}
+
+input.invalid,
+select.invalid {
+    border: 1px solid #ff5555;
+}
+
+.note {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: 12px;
+}
+
+/* DASHBOARD */
+
+.stat {
+    font-size: 30px;
+    color: var(--accent);
+    margin-top: 8px;
+}
+
+/* CALCULATOR */
+
+.calculator {
+    max-width: 340px;
+    margin: auto;
+    background: var(--panel);
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+}
+
+.calc-display {
+    width: 100%;
+    height: 65px;
+    background: var(--input);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    margin-bottom: 12px;
+    padding: 12px;
+    text-align: right;
+    font-size: 25px;
+    color: var(--text);
+}
+
+.key-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.key-grid button {
+    height: 52px;
+    font-size: 18px;
+    margin: 0;
+}
+
+.key-grid .wide {
+    grid-column: span 2;
+}
+
+/* CHATBOT */
+
+.chat-fab {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    border-radius: 50%;
+    width: 58px;
+    height: 58px;
+    font-size: 23px;
+    z-index: 20;
+}
+
+.chat-panel {
+    display: none;
+    position: fixed;
+    right: 22px;
+    bottom: 90px;
+    width: min(340px, calc(100% - 30px));
+    height: 420px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    z-index: 20;
+    overflow: hidden;
+}
+
+.chat-head {
+    background: linear-gradient(90deg, #7437dc, #2779ec);
+    padding: 14px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chat-log {
+    height: 310px;
+    overflow-y: auto;
+    padding: 12px;
+}
+
+.bot-msg,
+.user-msg {
+    padding: 9px 11px;
+    border-radius: 10px;
+    margin: 8px 0;
+    max-width: 90%;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.bot-msg {
+    background: var(--panel2);
+    color: var(--text);
+}
+
+.user-msg {
+    background: #5634a5;
+    color: white;
+    margin-left: auto;
+}
+
+.chat-input {
+    display: flex;
+    padding: 8px;
+    gap: 5px;
+}
+
+.chat-input input {
+    margin: 0;
+}
+
+.chat-input button {
+    margin: 0;
+}
+
+.status {
+    font-size: 13px;
+    color: #ff7777;
+    min-height: 18px;
+    margin-top: 5px;
+}
+
+/* FOOTER */
+
+footer {
+    display: none;
+    text-align: center;
+    padding: 22px;
+    background: var(--panel2);
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+}
+
+footer p {
+    margin: 5px;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media(max-width: 768px) {
+    header {
+        align-items: flex-start;
+    }
+
+    #menuBtn {
+        display: inline-block;
+    }
+
+    nav {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    nav.open {
+        display: flex;
+    }
+
+    nav button {
+        text-align: left;
+    }
+
+    .page {
+        padding: 25px 5%;
+    }
+
+    .hero {
+        padding: 55px 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO PAGE -->
+
+<section id="intro">
+
+    <div class="logo">⌕</div>
+
+    <h1>FOUND IT</h1>
+
+    <p>LOST • FOUND • REUNITED</p>
+
+    <p>Lost Something? Find It Here!</p>
+
+    <button onclick="showPage('home')">
+        GET STARTED →
+    </button>
+
+</section>
+
+<!-- NAVIGATION BAR -->
+
+<header id="navbar">
+
+    <div class="brand">⌕ FOUND IT</div>
+
+    <button id="menuBtn" onclick="toggleMenu()">
+        ☰ Menu
+    </button>
+
+    <nav id="navLinks">
+
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('about')">About</button>
+        <button onclick="showPage('browse')">Browse</button>
+        <button onclick="showPage('lost')">Lost Report</button>
+        <button onclick="showPage('found')">Found Report</button>
+        <button onclick="showPage('dashboard')">Dashboard</button>
+        <button onclick="showPage('calculator')">Calculator</button>
+        <button onclick="showPage('login')">Sign In</button>
+        <button onclick="showPage('register')">Register</button>
+        <button onclick="toggleTheme()" id="themeBtn">☀ Light mode</button>
+
+    </nav>
+
+</header>
+
+<!-- HOME PAGE -->
+
+<section id="home" class="page">
+
+    <div class="hero">
+
+        <h1>Welcome to <span>FOUND IT</span></h1>
+
+        <p>
+            A smart and simple platform to report lost items,
+            find missing belongings and reunite people with
+            their valuable things.
+        </p>
+
+        <button onclick="showPage('lost')">
+            Report Lost Item
+        </button>
+
+        <button onclick="showPage('found')">
+            Report Found Item
+        </button>
+
+        <button onclick="showPage('browse')">
+            Explore Items
+        </button>
+
+    </div>
+
+    <h2 class="section-title" style="margin-top:38px">
+        What Can You Do?
+    </h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="icon">🔍</div>
+            <h3>Find Items</h3>
+            <p>Explore available lost and found reports.</p>
+            <button onclick="showPage('browse')">Explore</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">📢</div>
+            <h3>Report Lost</h3>
+            <p>Report your missing belongings easily.</p>
+            <button onclick="showPage('lost')">Report Now</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">🤝</div>
+            <h3>Report Found</h3>
+            <p>Help someone recover their missing belongings.</p>
+            <button onclick="showPage('found')">Help Someone</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">🧮</div>
+            <h3>Calculator</h3>
+            <p>Use the built-in JavaScript calculator.</p>
+            <button onclick="showPage('calculator')">Open Calculator</button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ABOUT PAGE -->
+
+<section id="about" class="page">
+
+    <h2 class="section-title">About FOUND IT</h2>
+
+    <div class="card">
+
+        <h3>Our Mission</h3>
+
+        <p>
+            FOUND IT is a lost and found management website
+            designed to make finding missing belongings easier.
+            It connects people who have lost items with people
+            who have found them.
+        </p>
+
+        <h3>Our Vision</h3>
+
+        <p>
+            To create a helpful community where every lost
+            belonging has a chance to be reunited with its owner.
+        </p>
+
+        <h3>Why Choose Us?</h3>
+
+        <p>
+            Easy reporting, organized item details and
+            a user-friendly website experience.
+        </p>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="icon">⚡</div>
+            <h3>Easy to Use</h3>
+            <p>Simple and user-friendly design.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🔐</div>
+            <h3>Privacy</h3>
+            <p>Public listings do not display account passwords or phone numbers.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">💙</div>
+            <h3>Community</h3>
+            <p>Helping people recover their belongings.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- REGISTRATION PAGE -->
+
+<section id="register" class="page">
+
+    <div class="form-box">
+
+        <h2 class="section-title">Create Your Account</h2>
+
+        <form id="registerForm" onsubmit="registerUser(event)" novalidate>
+
+            <label>Full Name</label>
+            <input id="regName" type="text" placeholder="Letters and spaces only">
+            <small class="error-msg" id="nameError"></small>
+
+            <label>Employee / Register ID</label>
+            <input id="regId" type="text" placeholder="6 to 12 letters or numbers">
+            <small class="error-msg" id="idError"></small>
+
+            <label>Email Address</label>
+            <input id="regEmail" type="email" placeholder="name@example.com">
+            <small class="error-msg" id="emailError"></small>
+
+            <label>Mobile Number</label>
+            <input id="regPhone" type="tel" placeholder="10 digit mobile number">
+            <small class="error-msg" id="phoneError"></small>
+
+            <label>Division</label>
+
+            <select id="regDept">
+                <option value="">Select Division</option>
+                <option>CSE</option>
+                <option>IT</option>
+                <option>ECE</option>
+                <option>EEE</option>
+                <option>MECH</option>
+                <option>Other</option>
+            </select>
+
+            <small class="error-msg" id="deptError"></small>
+
+            <label>Password</label>
+            <input id="regPassword" type="password" placeholder="Minimum 8 characters">
+            <small class="error-msg" id="passwordError"></small>
+
+            <label>Confirm Password</label>
+            <input id="confirmPassword" type="password" placeholder="Re-enter password">
+            <small class="error-msg" id="confirmError"></small>
+
+            <label>
+                <input id="terms" type="checkbox" style="width:auto">
+                I agree to the Terms of Service
+            </label>
+
+            <small class="error-msg" id="termsError"></small>
+
+            <button id="registerBtn" type="submit" disabled>
+                Register Now
+            </button>
+
+        </form>
+
+        <p class="note">
+            Already registered?
+            <a href="#" onclick="showPage('login')" style="color:var(--accent)">
+                Sign in
+            </a>
+        </p>
+
+    </div>
+
+</section>
+
+<!-- LOGIN PAGE -->
+
+<section id="login" class="page">
+
+    <div class="form-box">
+
+        <h2 class="section-title">Welcome Back!</h2>
+
+        <form onsubmit="loginUser(event)">
+
+            <label>Email Address</label>
+            <input type="email" id="loginEmail" required>
+
+            <label>Password</label>
+
+            <div style="display:flex;gap:7px">
+
+                <input type="password" id="loginPassword" required>
+
+                <button type="button" onclick="togglePassword('loginPassword')">
+                    Show
+                </button>
+
+            </div>
+
+            <div id="loginError" class="status"></div>
+
+            <button type="submit">Sign In</button>
+
+        </form>
+
+        <p class="note">
+            New user?
+            <a href="#" onclick="showPage('register')" style="color:var(--accent)">
+                Create account
+            </a>
+        </p>
+
+    </div>
+
+</section>
+
+<!-- DASHBOARD PAGE -->
+
+<section id="dashboard" class="page">
+
+    <h2 class="section-title">User Dashboard</h2>
+
+    <h3 id="welcomeUser">Welcome!</h3>
+
+    <p class="note">Manage your lost and found activities here.</p>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="icon">📦</div>
+            <h3>Total Reports</h3>
+            <div class="stat" id="totalReports">0</div>
+        </div>
+
+        <div class="card">
+            <div class="icon">🔎</div>
+            <h3>Lost Reports</h3>
+            <div class="stat" id="lostCount">0</div>
+        </div>
+
+        <div class="card">
+            <div class="icon">🎁</div>
+            <h3>Found Reports</h3>
+            <div class="stat" id="foundCount">0</div>
+        </div>
+
+    </div>
+
+    <button onclick="showPage('lost')">Report Lost Item</button>
+
+    <button onclick="showPage('found')">Report Found Item</button>
+
+    <button onclick="showPage('reported')">View All Reports</button>
+
+</section>
+
+<!-- LOST ITEM PAGE -->
+
+<section id="lost" class="page">
+
+    <div class="form-box">
+
+        <h2 class="section-title">Report a Lost Item</h2>
+
+        <form onsubmit="submitItem(event,'Lost')">
+
+            <label>Item Name</label>
+            <input id="lostName" required placeholder="Example: Wallet">
+
+            <label>Category</label>
+
+            <select id="lostCategory">
+                <option>Electronics</option>
+                <option>Books</option>
+                <option>Accessories</option>
+                <option>Documents</option>
+                <option>Others</option>
+            </select>
+
+            <label>Last Seen Location</label>
+            <input id="lostLocation" required>
+
+            <label>Date Lost</label>
+            <input type="date" id="lostDate" required>
+
+            <label>Description</label>
+            <textarea id="lostDescription" required></textarea>
+
+            <button type="submit">Submit Lost Report</button>
+
+        </form>
+
+    </div>
+
+</section>
+
+<!-- FOUND ITEM PAGE -->
+
+<section id="found" class="page">
+
+    <div class="form-box">
+
+        <h2 class="section-title">Report a Found Item</h2>
+
+        <form onsubmit="submitItem(event,'Found')">
+
+            <label>Item Name</label>
+            <input id="foundName" required>
+
+            <label>Category</label>
+
+            <select id="foundCategory">
+                <option>Electronics</option>
+                <option>Books</option>
+                <option>Accessories</option>
+                <option>Documents</option>
+                <option>Others</option>
+            </select>
+
+            <label>Found Location</label>
+            <input id="foundLocation" required>
+
+            <label>Date Found</label>
+            <input type="date" id="foundDate" required>
+
+            <label>Description</label>
+            <textarea id="foundDescription" required></textarea>
+
+            <button type="submit">Submit Found Report</button>
+
+        </form>
+
+    </div>
+
+</section>
+
+<!-- BROWSE ITEMS PAGE -->
+
+<section id="browse" class="page">
+
+    <h2 class="section-title">Browse Lost & Found Items</h2>
+
+    <p class="note">Explore the items reported by users.</p>
+
+    <div class="cards" id="itemList"></div>
+
+</section>
+
+<!-- ITEM DETAILS PAGE -->
+
+<section id="details" class="page">
+
+    <h2 class="section-title">Item Details</h2>
+
+    <div class="card" id="itemDetails">
+        Select an item to view details.
+    </div>
+
+    <button onclick="showPage('browse')">Back to Browse</button>
+
+</section>
+
+<!-- REPORTED ITEMS PAGE -->
+
+<section id="reported" class="page">
+
+    <h2 class="section-title">All Reported Items</h2>
+
+    <p class="note">
+        All reports submitted through FOUND IT.
+    </p>
+
+    <div class="cards" id="reportedList"></div>
+
+</section>
+
+<!-- CALCULATOR PAGE -->
+
+<section id="calculator" class="page">
+
+    <h2 class="section-title" style="text-align:center">
+        JavaScript Calculator
+    </h2>
+
+    <div class="calculator">
+
+        <input
+            class="calc-display"
+            id="calcDisplay"
+            aria-label="Calculator display"
+            readonly
+            placeholder="0"
+        >
+
+        <div class="key-grid">
+
+            <button onclick="clearCalc()" class="wide">C</button>
+            <button onclick="deleteCalc()">⌫</button>
+            <button onclick="addCalc('/')">÷</button>
+
+            <button onclick="addCalc('7')">7</button>
+            <button onclick="addCalc('8')">8</button>
+            <button onclick="addCalc('9')">9</button>
+            <button onclick="addCalc('*')">×</button>
+
+            <button onclick="addCalc('4')">4</button>
+            <button onclick="addCalc('5')">5</button>
+            <button onclick="addCalc('6')">6</button>
+            <button onclick="addCalc('-')">−</button>
+
+            <button onclick="addCalc('1')">1</button>
+            <button onclick="addCalc('2')">2</button>
+            <button onclick="addCalc('3')">3</button>
+            <button onclick="addCalc('+')">+</button>
+
+            <button onclick="addCalc('0')" class="wide">0</button>
+            <button onclick="addCalc('.')">.</button>
+            <button onclick="solveCalc()">=</button>
+
+        </div>
+
+        <p id="calcError" class="status"></p>
+
+    </div>
+
+</section>
+
+<!-- THANK YOU PAGE -->
+
+<section id="thankyou" class="page">
+
+    <div class="hero">
+
+        <div class="logo">✓</div>
+
+        <h1>Thank You!</h1>
+
+        <p>
+            Your submission has been completed successfully.
+            Thank you for using FOUND IT.
+        </p>
+
+        <button onclick="showPage('home')">Back to Home</button>
+
+        <button onclick="showPage('browse')">Browse Items</button>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer id="footer">
+
+    <h3>FOUND IT</h3>
+
+    <p>LOST • FOUND • REUNITED</p>
+
+    <p>© 2026 FOUND IT. All Rights Reserved.</p>
+
+</footer>
+
+<!-- CHATBOT -->
+
+<button
+    class="chat-fab"
+    onclick="toggleChat()"
+    aria-label="Open assistant chatbot">
+    💬
+</button>
+
+<div class="chat-panel" id="chatPanel">
+
+    <div class="chat-head">
+        FOUND IT Assistant
+        <button onclick="toggleChat()" style="padding:3px 9px;margin:0">
+            ×
+        </button>
+    </div>
+
+    <div class="chat-log" id="chatLog">
+        <div class="bot-msg">
+            Hi! I am the FOUND IT assistant.
+            Ask me how to report or browse an item.
+        </div>
+    </div>
+
+    <div class="chat-input">
+
+        <input
+            id="chatInput"
+            placeholder="Type your message..."
+            onkeydown="if(event.key==='Enter')sendChat()"
+        >
+
+        <button onclick="sendChat()">Send</button>
+
+    </div>
+
+</div>
+
+<script>
+
+// GLOBAL DATA
+
+const $ = id => document.getElementById(id);
+
+let items = JSON.parse(localStorage.getItem('foundItems') || '[]');
+
+let user = JSON.parse(localStorage.getItem('foundUser') || 'null');
+
+
+// PAGE NAVIGATION
+
+function showPage(pageId) {
+
+    $('intro').style.display = 'none';
+
+    $('navbar').style.display = 'flex';
+
+    $('footer').style.display = 'block';
+
+    document.querySelectorAll('.page').forEach(function(page) {
+        page.classList.remove('active');
+    });
+
+    $(pageId).classList.add('active');
+
+    $('navLinks').classList.remove('open');
+
+    if(pageId === 'dashboard') {
+        updateDashboard();
+    }
+
+    if(pageId === 'browse') {
+        displayItems();
+    }
+
+    if(pageId === 'reported') {
+        displayReported();
+    }
+
+    window.scrollTo(0,0);
+}
+
+
+// MOBILE MENU
+
+function toggleMenu() {
+    $('navLinks').classList.toggle('open');
+}
+
+
+// LIGHT AND DARK MODE
+
+function toggleTheme() {
+
+    document.body.classList.toggle('light');
+
+    const light = document.body.classList.contains('light');
+
+    localStorage.setItem('foundTheme', light ? 'light' : 'dark');
+
+    $('themeBtn').innerText =
+        light ? '☾ Dark mode' : '☀ Light mode';
+}
+
+if(localStorage.getItem('foundTheme') === 'light') {
+
+    document.body.classList.add('light');
+
+    $('themeBtn').innerText = '☾ Dark mode';
+}
+
+
+// PASSWORD SHOW AND HIDE
+
+function togglePassword(id) {
+
+    const field = $(id);
+
+    field.type = field.type === 'password' ? 'text' : 'password';
+
+}
+
+
+// REGISTRATION VALIDATION
+
+function validateRegistration() {
+
+    const checks = [
+
+        [
+            'regName',
+            /^[a-zA-Z ]{2,50}$/,
+            'nameError',
+            'Enter 2–50 letters and spaces only.'
+        ],
+
+        [
+            'regId',
+            /^[A-Z0-9]{6,12}$/i,
+            'idError',
+            'ID must contain 6–12 letters or numbers.'
+        ],
+
+        [
+            'regEmail',
+            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            'emailError',
+            'Enter a valid email address.'
+        ],
+
+        [
+            'regPhone',
+            /^[6-9]\d{9}$/,
+            'phoneError',
+            'Enter a valid 10-digit mobile number.'
+        ],
+
+        [
+            'regPassword',
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/,
+            'passwordError',
+            'Use 8+ characters with uppercase, lowercase, number and symbol.'
+        ]
+
+    ];
+
+    let valid = true;
+
+    checks.forEach(function(check) {
+
+        const id = check[0];
+        const regex = check[1];
+        const errorId = check[2];
+        const message = check[3];
+
+        const field = $(id);
+
+        const ok = regex.test(field.value.trim());
+
+        $(errorId).innerText =
+            field.value === '' ? '' : (ok ? '' : message);
+
+        field.classList.toggle(
+            'invalid',
+            field.value !== '' && !ok
+        );
+
+        if(!ok) {
+            valid = false;
+        }
+
+    });
+
+    const dept = $('regDept').value !== '';
+
+    const match =
+        $('confirmPassword').value !== '' &&
+        $('confirmPassword').value === $('regPassword').value;
+
+    $('deptError').innerText =
+        dept ? '' : 'Please select your division.';
+
+    $('confirmError').innerText =
+        $('confirmPassword').value === ''
+        ? ''
+        : 'Passwords do not match.';
+
+    $('termsError').innerText =
+        $('terms').checked ? '' : 'Please accept the Terms of Service.';
+
+    if(!dept || !match || !$('terms').checked) {
+        valid = false;
+    }
+
+    $('registerBtn').disabled = !valid;
+
+    return valid;
+}
+
+
+// REGISTRATION INPUT EVENTS
+
+[
+    'regName',
+    'regId',
+    'regEmail',
+    'regPhone',
+    'regPassword',
+    'confirmPassword',
+    'regDept',
+    'terms'
+].forEach(function(id) {
+
+    $(id).addEventListener('input', validateRegistration);
+
+    $(id).addEventListener('change', validateRegistration);
+
+    $(id).addEventListener('blur', validateRegistration);
+
+});
+
+
+// REGISTER USER
+
+function registerUser(event) {
+
+    event.preventDefault();
+
+    if(!validateRegistration()) {
+        return;
+    }
+
+    user = {
+
+        name: $('regName').value.trim(),
+
+        id: $('regId').value.trim(),
+
+        email: $('regEmail').value.trim(),
+
+        phone: $('regPhone').value.trim(),
+
+        dept: $('regDept').value,
+
+        password: $('regPassword').value
+
+    };
+
+    localStorage.setItem('foundUser', JSON.stringify(user));
+
+    alert('Registration successful! Please sign in.');
+
+    event.target.reset();
+
+    validateRegistration();
+
+    showPage('login');
+
+}
+
+
+// LOGIN USER
+
+function loginUser(event) {
+
+    event.preventDefault();
+
+    const email = $('loginEmail').value.trim();
+
+    const password = $('loginPassword').value;
+
+    if(user && user.email === email && user.password === password) {
+
+        $('loginError').innerText = '';
+
+        alert('Login successful!');
+
+        event.target.reset();
+
+        showPage('dashboard');
+
+    } else {
+
+        $('loginError').innerText =
+            'Invalid email or password. Please check your details.';
+
+    }
+
+}
+
+
+// SUBMIT LOST AND FOUND ITEMS
+
+function submitItem(event, type) {
+
+    event.preventDefault();
+
+    const prefix = type === 'Lost' ? 'lost' : 'found';
+
+    const item = {
+
+        name: $(prefix + 'Name').value.trim(),
+
+        category: $(prefix + 'Category').value,
+
+        location: $(prefix + 'Location').value.trim(),
+
+        date: $(prefix + 'Date').value,
+
+        description: $(prefix + 'Description').value.trim(),
+
+        type: type
+
+    };
+
+    items.push(item);
+
+    localStorage.setItem('foundItems', JSON.stringify(items));
+
+    event.target.reset();
+
+    alert(type + ' item report submitted successfully!');
+
+    showPage('thankyou');
+
+}
+
+
+// SAFE DISPLAY TEXT
+
+function safeText(value) {
+
+    return String(value).replace(/[&<>"']/g, function(ch) {
+
+        return {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        }[ch];
+
+    });
+
+}
+
+
+// DISPLAY BROWSE ITEMS
+
+function displayItems() {
+
+    const list = $('itemList');
+
+    list.innerHTML = '';
+
+    if(!items.length) {
+
+        list.innerHTML =
+            '<p class="note">No items reported yet.</p>';
+
+        return;
+    }
+
+    items.forEach(function(item, index) {
+
+        list.innerHTML += `
+
+            <div class="card">
+
+                <div class="icon">📦</div>
+
+                <h3>${safeText(item.name)}</h3>
+
+                <p>Type: ${item.type}</p>
+
+                <p>Category: ${safeText(item.category)}</p>
+
+                <p>Location: ${safeText(item.location)}</p>
+
+                <button onclick="viewDetails(${index})">
+                    View Details
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+// VIEW ITEM DETAILS
+
+function viewDetails(index) {
+
+    const item = items[index];
+
+    $('itemDetails').innerHTML = `
+
+        <div class="icon">📦</div>
+
+        <h2>${safeText(item.name)}</h2>
+
+        <p>Type: ${item.type}</p>
+
+        <p>Category: ${safeText(item.category)}</p>
+
+        <p>Location: ${safeText(item.location)}</p>
+
+        <p>Date: ${safeText(item.date)}</p>
+
+        <p>Description: ${safeText(item.description)}</p>
+
+    `;
+
+    showPage('details');
+
+}
+
+
+// DASHBOARD
+
+function updateDashboard() {
+
+    $('totalReports').innerText = items.length;
+
+    $('lostCount').innerText =
+        items.filter(item => item.type === 'Lost').length;
+
+    $('foundCount').innerText =
+        items.filter(item => item.type === 'Found').length;
+
+    $('welcomeUser').innerText =
+        user ? 'Welcome, ' + user.name + '!' : 'Welcome to FOUND IT!';
+
+}
+
+
+// DISPLAY ALL REPORTED ITEMS
+
+function displayReported() {
+
+    const list = $('reportedList');
+
+    list.innerHTML = '';
+
+    if(!items.length) {
+
+        list.innerHTML =
+            '<p class="note">No reports available.</p>';
+
+        return;
+    }
+
+    items.forEach(function(item) {
+
+        list.innerHTML += `
+
+            <div class="card">
+
+                <div class="icon">📦</div>
+
+                <h3>${safeText(item.name)}</h3>
+
+                <p>${item.type} Item</p>
+
+                <p>Category: ${safeText(item.category)}</p>
+
+                <p>Location: ${safeText(item.location)}</p>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+// CALCULATOR FUNCTIONS
+
+function addCalc(value) {
+
+    $('calcError').innerText = '';
+
+    $('calcDisplay').value += value;
+
+}
+
+function clearCalc() {
+
+    $('calcDisplay').value = '';
+
+    $('calcError').innerText = '';
+
+}
+
+function deleteCalc() {
+
+    $('calcDisplay').value =
+        $('calcDisplay').value.slice(0, -1);
+
+}
+
+
+// CALCULATOR RESULT
+
+function solveCalc() {
+
+    const expression = $('calcDisplay').value;
+
+    if(!expression || !/^[0-9+\-*/. ]+$/.test(expression)) {
+
+        $('calcError').innerText =
+            'Please enter a valid expression.';
+
+        return;
+    }
+
+    const tokens = expression.match(
+        /(?:\d+\.?\d*|\.\d+|[+\-*/])/g
+    );
+
+    if(!tokens || tokens.join('') !== expression.replace(/\s/g, '')) {
+
+        $('calcError').innerText =
+            'Invalid mathematical expression.';
+
+        return;
+    }
+
+    try {
+
+        let result = Number(tokens[0]);
+
+        for(let i = 1; i < tokens.length; i += 2) {
+
+            const op = tokens[i];
+
+            const next = Number(tokens[i + 1]);
+
+            if(tokens[i + 1] === undefined || Number.isNaN(next)) {
+                throw Error('Invalid expression');
+            }
+
+            if(op === '+') {
+                result += next;
+            }
+
+            else if(op === '-') {
+                result -= next;
+            }
+
+            else if(op === '*') {
+                result *= next;
+            }
+
+            else if(op === '/') {
+
+                if(next === 0) {
+                    throw Error('Cannot divide by zero.');
+                }
+
+                result /= next;
+            }
+
+        }
+
+        if(!Number.isFinite(result)) {
+            throw Error('Invalid result.');
+        }
+
+        if(result < -1000 || result > 1000) {
+            throw Error('Result must be between -1000 and 1000.');
+        }
+
+        $('calcDisplay').value =
+            String(Number(result.toFixed(8)));
+
+        $('calcError').innerText = '';
+
+    }
+
+    catch(error) {
+
+        $('calcError').innerText =
+            error.message || 'Invalid mathematical expression.';
+
+    }
+
+}
+
+
+// CHATBOT FUNCTIONS
+
+function toggleChat() {
+
+    const panel = $('chatPanel');
+
+    panel.style.display =
+        panel.style.display === 'block' ? 'none' : 'block';
+
+    if(panel.style.display === 'block') {
+        $('chatInput').focus();
+    }
+
+}
+
+
+// CHATBOT REPLY SYSTEM
+
+function sendChat() {
+
+    const input = $('chatInput');
+
+    const message = input.value.trim();
+
+    if(!message) {
+        return;
+    }
+
+    const log = $('chatLog');
+
+    log.innerHTML += `
+        <div class="user-msg">
+            ${safeText(message)}
+        </div>
+    `;
+
+    const text = message.toLowerCase();
+
+    let reply;
+
+    if(text.includes('lost')) {
+
+        reply = 'To report a lost item, open Lost Report, fill in the item details and submit the form.';
+
+    }
+
+    else if(text.includes('found')) {
+
+        reply = 'To report an item you found, open Found Report, enter its details and submit.';
+
+    }
+
+    else if(text.includes('browse') || text.includes('search')) {
+
+        reply = 'Choose Browse in the navigation bar to view all submitted item reports.';
+
+    }
+
+    else if(text.includes('login') || text.includes('sign in')) {
+
+        reply = 'Open Sign In and enter the email and password used during registration.';
+
+    }
+
+    else if(text.includes('register') || text.includes('account')) {
+
+        reply = 'Open Register and complete all required fields. The form checks your entries before enabling the button.';
+
+    }
+
+    else if(text.includes('calculator')) {
+
+        reply = 'Open Calculator from the navigation bar. Use the number and operator keys, then press equals.';
+
+    }
+
+    else if(text.includes('dashboard')) {
+
+        reply = 'The Dashboard shows the total, lost and found report counts.';
+
+    }
+
+    else if(text.includes('hello') || text.includes('hi')) {
+
+        reply = 'Hello! I can guide you around FOUND IT. Ask me about lost reports, found reports, browsing, login or the calculator.';
+
+    }
+
+    else {
+
+        reply = 'I can help with reporting lost items, reporting found items, browsing reports, registration, login and using the calculator.';
+
+    }
+
+    log.innerHTML += `
+        <div class="bot-msg">
+            ${reply}
+        </div>
+    `;
+
+    input.value = '';
+
+    log.scrollTop = log.scrollHeight;
+
+}
+
+</script>
+
+</body>
+</html>
